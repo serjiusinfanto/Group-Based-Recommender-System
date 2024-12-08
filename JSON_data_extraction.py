@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 import json
-import sqlite3
 
 class YelpDataProcessor:
 
@@ -169,6 +168,8 @@ class YelpDataProcessor:
         print(self.checkin_df.head())
 
         return self.checkin_df
+
+        
     
     #Function to merge all the dataframes together
     def merge_data(self):
