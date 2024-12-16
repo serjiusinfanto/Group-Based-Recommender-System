@@ -34,18 +34,15 @@ def preprocess_business_file(business_path):
     business_df['price_range'] = business_df['price_range'].astype('Int64')
     business_df[['price_range']] = knn_imputer.fit_transform(business_df[['price_range']])
     business_df['price_range'] = business_df['price_range'].round().astype(int)
+    price_range_one_hot = pd.get_dummies(business_df['price_range'], prefix='price_range')
+    business_df = pd.concat([business_df,price_range_one_hot],axis=1)
+    business_df = business_df.drop(columns='price_range')
     
     #Dealing with null values for take out column
     business_df['take_out'] = business_df['take_out'].astype('boolean')
     business_df['take_out'] = business_df['take_out'].fillna( business_df['take_out'].mode()[0])
 
-    #Encoding true and false values for multiple columns
-    columns_to_be_mapped = ['good_for_groups','take_out','touristy_ambience','hipster_ambience','romantic_ambience','divey_ambience','intimate_ambience','trendy_ambience','upscale_ambience','classy_ambience','casual_ambience']
-    for col in columns_to_be_mapped:
-        business_df[col] = business_df[col].map({
-            True : 1,
-            False : 0
-        })
+    
     
     #Dealing with null values and one hot encoding for alcohol column
     business_df['alcohol'] = business_df['alcohol'].fillna( business_df['alcohol'].mode()[0])
@@ -54,6 +51,15 @@ def preprocess_business_file(business_path):
     business_df = pd.concat([business_df, alcohol_one_hot], axis=1)
     business_df = business_df.drop(columns='alcohol')
     print(business_df.duplicated(subset='business_id').sum())
+
+    #Encoding true and false values for multiple columns
+    columns_to_be_mapped = ['good_for_groups','take_out','touristy_ambience','hipster_ambience','romantic_ambience','divey_ambience','intimate_ambience','trendy_ambience','upscale_ambience','classy_ambience','casual_ambience','alcohol_beer_and_wine','alcohol_full_bar','alcohol_no_alcohol','price_range_1','price_range_2','price_range_3','price_range_4']
+    for col in columns_to_be_mapped:
+        business_df[col] = business_df[col].map({
+            True : 1,
+            False : 0
+        })
+
     return business_df
 
 if __name__ == "__main__":
