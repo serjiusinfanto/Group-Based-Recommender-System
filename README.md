@@ -40,4 +40,4 @@ This project develops a machine-learning-based restaurant recommendation system 
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/serjiusinfanto/restaurant-recommender.git
+   git clone https://github.com/serjiusinfanto/Group-Based-Recommender-System.git
