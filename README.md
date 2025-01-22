@@ -41,3 +41,8 @@ This project develops a machine-learning-based restaurant recommendation system 
 1. Clone the repository:
    ```bash
    git clone https://github.com/serjiusinfanto/Group-Based-Recommender-System.git
+
+## Future Enhancements
+1. Integrating user sentiment analysis from reviews
+2. Real-time updates for restaurant availability and wait times
+3. Implementing reinforcement learning for adaptive recommendations
